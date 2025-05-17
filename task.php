@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_task'])) {
         $tasks[] = ['id' => time(), 'task' => $newTask, 'done' => false];
         file_put_contents('tasks.json', json_encode($tasks));
     }
-    header("Location: todo.php");
+    header("Location: task.php");
     exit;
 }
 
@@ -22,7 +22,7 @@ if (isset($_GET['toggle'])) {
         }
     }
     file_put_contents('tasks.json', json_encode($tasks));
-    header("Location: todo.php");
+    header("Location: task.php");
     exit;
 }
 
@@ -30,7 +30,7 @@ if (isset($_GET['toggle'])) {
 if (isset($_GET['delete'])) {
     $tasks = array_filter($tasks, fn($t) => $t['id'] != $_GET['delete']);
     file_put_contents('tasks.json', json_encode(array_values($tasks)));
-    header("Location: todo.php");
+    header("Location: task.php");
     exit;
 }
 ?>
