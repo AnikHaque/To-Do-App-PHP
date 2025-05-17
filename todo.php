@@ -12,3 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_task'])) {
     header("Location: todo.php");
     exit;
 }
+
+// Handle Mark Done/Undone
+if (isset($_GET['toggle'])) {
+    foreach ($tasks as &$task) {
+        if ($task['id'] == $_GET['toggle']) {
+            $task['done'] = !$task['done'];
+            break;
+        }
+    }
+    file_put_contents('tasks.json', json_encode($tasks));
+    header("Location: todo.php");
+    exit;
+}
