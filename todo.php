@@ -25,3 +25,12 @@ if (isset($_GET['toggle'])) {
     header("Location: todo.php");
     exit;
 }
+
+// Handle Delete Task
+if (isset($_GET['delete'])) {
+    $tasks = array_filter($tasks, fn($t) => $t['id'] != $_GET['delete']);
+    file_put_contents('tasks.json', json_encode(array_values($tasks)));
+    header("Location: todo.php");
+    exit;
+}
+?>
